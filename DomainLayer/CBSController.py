@@ -1,7 +1,13 @@
-from InfrastructureLayer import CBSControllerDao
+from InfrastructureLayer.CBSControllerDao import CBSControllerDao
 
 
 class CBSController:
+    def bagsReachedLoadingArea(self):
+        CBSControllerDao().bagsReachedLoadingArea()
+
+    def jammed(self):
+        CBSControllerDao().jammed()
+
     def jammedCBChecker(self):
         pass
 

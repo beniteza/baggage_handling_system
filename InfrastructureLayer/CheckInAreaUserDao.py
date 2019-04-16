@@ -7,9 +7,6 @@ mysql = MySQL(app)
 
 class CheckInAreaUserDao:
     def placeBagIntoCB(self, bagId):
-        print('\n\n')
-        print(bagId)
-        print('\n\n')
         cur = mysql.connection.cursor()
         position = 'Conveyor Belt System'
         isBeingRouted = True

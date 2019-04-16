@@ -2,6 +2,7 @@ from flask import render_template, jsonify
 from ApplicationLayer.CheckInAreaUserHandler import CheckInAreaUserHandler
 from ApplicationLayer.AirlineLoadingAreaUserHandler import AirlineLoadingAreaUserHandler
 from ApplicationLayer.TechnicianAreaUserHandler import TechnicianAreaUserHandler
+from ApplicationLayer.CBSControllerHandler import CBSControllerHandler
 from InfrastructureLayer.DBconfig import DatabaseConfig
 import os
 from flask_mysqldb import MySQL
@@ -43,6 +44,16 @@ def getJammedSignal():
 @app.route('/sendUnjammedSignal', methods=['POST'])
 def sendUnjammedSignal():
     return TechnicianAreaUserHandler().sendUnjammedSignal()
+
+
+@app.route('/bagsReachedLoadingArea', methods=['POST'])
+def bagsReachedLoadingArea():
+    return CBSControllerHandler().bagsReachedLoadingArea()
+
+
+@app.route('/jammed', methods=['POST'])
+def jammed():
+    return CBSControllerHandler().jammed()
 
 
 if __name__ == '__main__':

@@ -25,6 +25,8 @@ class InterfaceOptions:
         2. Business Class
         3. Premium Economy Class
         4. Economy Class
+        5. Check If A Conveyor Belt Is Jammed
+        6. Send Unjammed Signal
         """
         )
         classService = ''

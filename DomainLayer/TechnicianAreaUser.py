@@ -6,4 +6,4 @@ class TechnicianAreaUser:
         return TechnicianAreaUserDao().getJammedSignal()
 
     def sendUnjammedSignal(self):
-        TechnicianAreaUserDao().sendUnjammedSignal()
+        return TechnicianAreaUserDao().sendUnjammedSignal()
