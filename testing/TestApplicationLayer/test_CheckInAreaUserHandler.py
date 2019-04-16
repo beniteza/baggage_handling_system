@@ -9,12 +9,12 @@ mysql = MySQL(app)
 
 class TestCheckInAreaUserHandler(unittest.TestCase):
     def test_checkInBag(self):
-        response = requests.post(
+        requests.post(
             "http://localhost:5000/checkInBag", {"passengerId": '55', "flightId": '55', "weight": '55', "classService": 'Premium Economy Class'})
 
         cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM bags where passengerId = %s and flightId = %s and weight = %s and classService = %s",
-                             ('55', '55', '55', 'Premium Economy Class'))
+        cur.execute("SELECT * FROM bags where passengerId = %s and flightId = %s and weight = %s and classService = %s",
+                    ('55', '55', '55', 'Premium Economy Class'))
         bag = cur.fetchall()
 
         print(bag)

@@ -19,7 +19,6 @@ class CBSControllerHandler:
         pass
 
     def sendJammedSignal(self):
-        # check if a cb is jammed from the db
         pass
 
     def rerouteBagsInCBS(self):

@@ -13,7 +13,6 @@ class BagDao:
                     (passengerId, flightId, weight, classService))
         mysql.connection.commit()
 
-    # Make this a general query
     def getBagTagIdQuery(self):
         table = 'bagTags'
         bagTagId = GeneralQueries().getLastInsertedIdQuery(table)

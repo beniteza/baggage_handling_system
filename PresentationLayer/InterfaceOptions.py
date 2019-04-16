@@ -48,9 +48,6 @@ class InterfaceOptions:
                 print('INVALID OPTION')
         requests.post(
             "http://localhost:5000/checkInBag", {"passengerId": passengerId, "flightId": flightId, "weight": weight, "classService": classService})
-        # requests.post(
-        #     "http://localhost:5000/login", {"username": 'axvi', "password": '123'})
-        # print('\nBAG CHECKED IN!\n')
 
     def placeBagIntoCB(self):
         requests.post(
