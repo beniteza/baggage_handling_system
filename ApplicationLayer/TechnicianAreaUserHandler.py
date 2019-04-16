@@ -8,4 +8,5 @@ class TechnicianAreaUserHandler:
         return jsonify(signal)
 
     def sendUnjammedSignal(self):
-        return TechnicianAreaUser().sendUnjammedSignal()
+        result = TechnicianAreaUser().sendUnjammedSignal()
+        return jsonify(result)

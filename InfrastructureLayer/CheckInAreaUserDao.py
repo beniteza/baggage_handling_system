@@ -14,3 +14,4 @@ class CheckInAreaUserDao:
                     (position, isBeingRouted, bagId))
         mysql.connection.commit()
         cur.close()
+        return 'BAG WAS PLACED INTO THE CONVEYOR BELT'

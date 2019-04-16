@@ -10,6 +10,8 @@ class InterfaceOptions:
         2. Place Bag Into Conveyor Belt
         3. Scan Bag Tag
         4. View Bags In Airline Loading Area
+        5. Check If A Conveyor Belt Is Jammed
+        6. Send Unjammed Signal
         """
         )
 
@@ -25,8 +27,6 @@ class InterfaceOptions:
         2. Business Class
         3. Premium Economy Class
         4. Economy Class
-        5. Check If A Conveyor Belt Is Jammed
-        6. Send Unjammed Signal
         """
         )
         classService = ''
