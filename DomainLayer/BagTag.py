@@ -1,4 +1,4 @@
-from InfrastructureLayer import BagDao
+from InfrastructureLayer.BagDao import BagDao
 
 
 class BagTag:

@@ -1,16 +1,10 @@
 from flask import request
-from DomainLayer import Bag, BagTag
+from DomainLayer.Bag import Bag
+from DomainLayer.BagTag import BagTag
 
 
 class BagHandler:
-    def checkInBag(self):
-        passengerId = request.form['passengerId']
-        flightId = request.form['flightId']
-        weight = request.form['weight']
-        classService = request.form['classService']
-        # Create Bag Tag and get its id
+    def createBag(self, passengerId, flightId, weight, classService):
         bagTag = BagTag(passengerId, flightId, weight, classService)
         bagTagId = bagTag.getBagTagId()
-        # Create Bag
-        bag = Bag(bagTagId)
-        return bag
+        Bag(bagTagId)

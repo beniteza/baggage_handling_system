@@ -1,4 +1,4 @@
-from InfrastructureLayer import BagDao
+from InfrastructureLayer.BagDao import BagDao
 
 
 class Bag:
@@ -8,5 +8,6 @@ class Bag:
         self.isBeingRouted = False
         BagDao().createBagQuery(self.bagTagId, self.position, self.isBeingRouted)
 
-    def getBagId(self):
-        return BagDao().getBagIdQuery()
+
+def getBagId():
+    return BagDao().getBagIdQuery()
