@@ -7,9 +7,13 @@ mysql = MySQL(app)
 
 class CheckInAreaUserDao:
     def placeBagIntoCB(self, bagId):
+        print('\n\n')
+        print(bagId)
+        print('\n\n')
         cur = mysql.connection.cursor()
         position = 'Conveyor Belt System'
-        cur.execute("UPDATE `bags` SET `position` = %s WHERE `id` = %s",
-                    (position, bagId))
+        isBeingRouted = True
+        cur.execute("UPDATE `bags` SET `position` = %s, `isBeingRouted` = %s WHERE `id` = %s",
+                    (position, isBeingRouted, bagId))
         mysql.connection.commit()
         cur.close()

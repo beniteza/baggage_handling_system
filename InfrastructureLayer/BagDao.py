@@ -15,7 +15,8 @@ class BagDao:
 
     # Make this a general query
     def getBagTagIdQuery(self):
-        bagTagId = GeneralQueries().getLastInsertedIdQuery()
+        table = 'bagTags'
+        bagTagId = GeneralQueries().getLastInsertedIdQuery(table)
         return bagTagId
 
     def createBagQuery(self, bagTagId, position, isBeingRouted):
@@ -25,5 +26,6 @@ class BagDao:
         mysql.connection.commit()
 
     def getBagIdQuery(self):
-        bagId = GeneralQueries().getLastInsertedIdQuery()
+        table = 'bags'
+        bagId = GeneralQueries().getLastInsertedIdQuery(table)
         return bagId

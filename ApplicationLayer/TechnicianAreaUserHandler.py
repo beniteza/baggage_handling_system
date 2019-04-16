@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from DomainLayer import TechnicianAreaUser
+from DomainLayer.TechnicianAreaUser import TechnicianAreaUser
 
 
 class TechnicianAreaUserHandler:

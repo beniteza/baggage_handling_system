@@ -1,5 +1,5 @@
 from flask import request
-from DomainLayer import ConveyorBelt
+from DomainLayer.ConveyorBelt import ConveyorBelt
 
 
 class ConveyorBeltHandler:
@@ -11,6 +11,3 @@ class ConveyorBeltHandler:
 
     def jamConveyorBelt(self):
         ConveyorBelt().jamConveyorBelt()
-
-    def unjamConveyorBelt(self):
-        ConveyorBelt().unjamConveyorBelt()

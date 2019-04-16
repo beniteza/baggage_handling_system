@@ -1,4 +1,4 @@
-from InfrastructureLayer import TechnicianAreaUserDao
+from InfrastructureLayer.TechnicianAreaUserDao import TechnicianAreaUserDao
 
 
 class TechnicianAreaUser:

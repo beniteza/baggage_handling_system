@@ -1,4 +1,4 @@
-from InfrastructureLayer import ConveyorBeltDao
+from InfrastructureLayer.ConveyorBeltDao import ConveyorBeltDao
 
 
 class ConveyorBelt:

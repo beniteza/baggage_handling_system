@@ -3,10 +3,6 @@ from DomainLayer import CBSController
 
 
 class CBSControllerHandler:
-
-    def jammedCBChecker(self):
-        pass
-
     def routeBags(self):
         pass
 

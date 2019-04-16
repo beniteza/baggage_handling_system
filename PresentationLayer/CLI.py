@@ -11,5 +11,9 @@ while(True):
         InterfaceOptions().scanBag()
     elif option == '4':
         InterfaceOptions().getAllBagsInAirlineLoadingArea()
+    elif option == '5':
+        InterfaceOptions().getJammedSignal()
+    elif option == '6':
+        InterfaceOptions().sendUnjammedSignal()
     else:
         print('INVALID OPTION')

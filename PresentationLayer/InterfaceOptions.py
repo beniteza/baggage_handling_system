@@ -46,7 +46,9 @@ class InterfaceOptions:
                 print('INVALID OPTION')
         requests.post(
             "http://localhost:5000/checkInBag", {"passengerId": passengerId, "flightId": flightId, "weight": weight, "classService": classService})
-        print('\nBAG CHECKED IN!\n')
+        # requests.post(
+        #     "http://localhost:5000/login", {"username": 'axvi', "password": '123'})
+        # print('\nBAG CHECKED IN!\n')
 
     def placeBagIntoCB(self):
         requests.post(
@@ -63,3 +65,13 @@ class InterfaceOptions:
         requests.get(
             "http://localhost:5000/bagsInLoadingArea")
         print('\nBAGS DISPLAYED!\n')
+
+    def getJammedSignal(self):
+        requests.get(
+            "http://localhost:5000/getJammedSignal")
+        print('\nGOT JAMMED SIGNAL!\n')
+
+    def sendUnjammedSignal(self):
+        requests.post(
+            "http://localhost:5000/sendUnjammedSignal")
+        print('\nSENT UNJAMMED SIGNAL!\n')

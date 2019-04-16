@@ -1,4 +1,4 @@
-from InfrastructureLayer import CheckInAreaUserDao
+from InfrastructureLayer.CheckInAreaUserDao import CheckInAreaUserDao
 
 
 class CheckInAreaUser:

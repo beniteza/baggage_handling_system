@@ -16,5 +16,8 @@ class TechnicianAreaUserDao:
         return 'Conveyor Belt Jammed!'
 
     def sendUnjammedSignal(self):
-        # query that updates a jammed status
-        pass
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE `conveyorBelt` SET `isJammed` WHERE `isJammed` = %s",
+                    (False, True))
+        mysql.connection.commit()
+        cur.close()
