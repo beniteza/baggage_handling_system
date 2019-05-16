@@ -8,17 +8,8 @@ class CBSController:
     def jammed(self):
         return CBSControllerDao().jammed()
 
-    def jammedCBChecker(self):
-        pass
+    def deactivateJammedBelt(self):
+        return CBSControllerDao().deactivateJammedBelt()
 
-    def deactivateJammedBelt(self, beltId):
-        pass
-
-    def sendJammedSignal(self):
-        pass
-
-    def rerouteBagsInCBS(self):
-        pass
-
-    def activateBelt(self, beltId):
-        pass
+    def activateBelt(self):
+        return CBSControllerDao().activateBelt()

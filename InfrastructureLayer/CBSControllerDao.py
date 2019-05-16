@@ -43,14 +43,34 @@ class CBSControllerDao:
         cur.close()
         return 'Belt was jammed'
 
-    def jammedCBChecker(self):
-        pass
+    def deactivateJammedBelt(self):
+        cur = mysql.connection.cursor()
+        result = cur.execute(
+            "select * from conveyorBelt where `isJammed` = 1")
 
-    def deactivateJammedBelt(self, beltId):
-        pass
+        if result == 0:
+            return 'No Jammed Belt to Deactivate'
 
-    def sendJammedSignal(self):
-        pass
+        isActive = False
+        cur.execute(
+            "UPDATE `conveyorBelt` SET `isActive` = %s WHERE `isJammed` = 1", [isActive])
+        mysql.connection.commit()
 
-    def activateBelt(self, beltId):
-        pass
+        cur.close()
+        return 'Belt was deactivated'
+
+    def activateBelt(self):
+        cur = mysql.connection.cursor()
+        result = cur.execute(
+            "select * from conveyorBelt where `isActive` = 0")
+
+        if result == 0:
+            return 'No Belt to Activate'
+
+        isActive = True
+        cur.execute(
+            "UPDATE `conveyorBelt` SET `isActive` = %s WHERE `isActive` = 0", [isActive])
+        mysql.connection.commit()
+
+        cur.close()
+        return 'Belt was Activated'

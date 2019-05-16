@@ -43,19 +43,6 @@ class InterfaceOptions:
         """
         )
 
-    # def startScreen(self):
-    #     print(
-    #         """
-    #     Baggage Handling System
-    #     1. Check In Bag
-    #     2. Place Bag Into Conveyor Belt
-    #     3. Scan Bag Tag
-    #     4. View Bags In Airline Loading Area
-    #     5. Check If A Conveyor Belt Is Jammed
-    #     6. Send Unjammed Signal
-    #     """
-    #     )
-
     def checkInBag(self):
         print('Enter Bag Information...')
         passengerId = input('Passenger Id: ')
@@ -147,5 +134,6 @@ class InterfaceOptions:
     def sendUnjammedSignal(self):
         response = requests.post(
             "http://localhost:5000/sendUnjammedSignal")
+        requests.get("http://localhost:5000/activateBelt")
         print('\n')
         print(response.text)

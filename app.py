@@ -56,6 +56,16 @@ def jammed():
     return CBSControllerHandler().jammed()
 
 
+@app.route('/deactivateJammedBelt')
+def deactivateJammedBelt():
+    return CBSControllerHandler().deactivateJammedBelt()
+
+
+@app.route('/activateBelt')
+def activateBelt():
+    return CBSControllerHandler().activateBelt()
+
+
 if __name__ == '__main__':
     app.secret_key = os.urandom(24)
     app.run(debug=True)

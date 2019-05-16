@@ -11,17 +11,10 @@ class CBSControllerHandler:
         response = CBSController().jammed()
         return jsonify(response)
 
-    def jammedCBChecker(self):
-        pass
+    def deactivateJammedBelt(self):
+        response = CBSController().deactivateJammedBelt()
+        return jsonify(response)
 
-    def deactivateJammedBelt(self, beltId):
-        pass
-
-    def sendJammedSignal(self):
-        pass
-
-    def rerouteBagsInCBS(self):
-        pass
-
-    def activateBelt(self, beltId):
-        pass
+    def activateBelt(self):
+        response = CBSController().activateBelt()
+        return jsonify(response)
