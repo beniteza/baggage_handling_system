@@ -2,18 +2,59 @@ import requests
 
 
 class InterfaceOptions:
-    def startScreen(self):
+    def userSelectScreen(self):
         print(
             """
-        Baggage Handling System
-        1. Check In Bag
-        2. Place Bag Into Conveyor Belt
-        3. Scan Bag Tag
-        4. View Bags In Airline Loading Area
-        5. Check If A Conveyor Belt Is Jammed
-        6. Send Unjammed Signal
+        User Login
+        1. Clerk
+        2. Loader
+        3. Technician
         """
         )
+
+    def clerkStartScreen(self):
+        print(
+            """
+        CLERK - Baggage Handling System
+        1. Check In Bag
+        2. Place Bag Into Conveyor Belt
+        3. Exit
+        """
+        )
+
+    def loaderStartScreen(self):
+        print(
+            """
+        LOADER - Baggage Handling System
+        1. Scan Bag Tag
+        2. View Bags In Airline Loading Area
+        3. Check If A Conveyor Belt Is Jammed
+        4. Exit
+        """
+        )
+
+    def technicianStartScreen(self):
+        print(
+            """
+        TECHNICIAN - Baggage Handling System
+        1. Check If A Conveyor Belt Is Jammed
+        2. Send Unjammed Signal
+        3. Exit
+        """
+        )
+
+    # def startScreen(self):
+    #     print(
+    #         """
+    #     Baggage Handling System
+    #     1. Check In Bag
+    #     2. Place Bag Into Conveyor Belt
+    #     3. Scan Bag Tag
+    #     4. View Bags In Airline Loading Area
+    #     5. Check If A Conveyor Belt Is Jammed
+    #     6. Send Unjammed Signal
+    #     """
+    #     )
 
     def checkInBag(self):
         print('Enter Bag Information...')
@@ -46,31 +87,65 @@ class InterfaceOptions:
                 break
             else:
                 print('INVALID OPTION')
-        requests.post(
+        response = requests.post(
             "http://localhost:5000/checkInBag", {"passengerId": passengerId, "flightId": flightId, "weight": weight, "classService": classService})
 
+        print('\n')
+        print(response.text)
+
     def placeBagIntoCB(self):
-        requests.post(
+        response = requests.post(
             "http://localhost:5000/placeBagIntoCB")
-        print('\nBAG PLACED INTO CB!\n')
+        print('\n')
+        print(response.text)
 
     def scanBag(self):
         bagTagId = input('Bag Tag Id: ')
-        requests.post(
+        scannedBag = requests.post(
             "http://localhost:5000/scanBagTag", {"bagTagId": bagTagId})
-        print('\nBAG SCANNED!\n')
+        print('\n')
+        print(scannedBag.text)
 
     def getAllBagsInAirlineLoadingArea(self):
-        requests.get(
-            "http://localhost:5000/bagsInLoadingArea")
-        print('\nBAGS DISPLAYED!\n')
+        print(
+            """
+        Choose Airline:
+        1. A
+        2. B
+        3. C
+        4. D
+        """
+        )
+        airline = ''
+        while(True):
+            airlineOption = input('Airline: ')
+            if airlineOption == '1':
+                airline = 'A'
+                break
+            elif airlineOption == '2':
+                airline = 'B'
+                break
+            elif airlineOption == '3':
+                airline = 'C'
+                break
+            elif airlineOption == '4':
+                airline = 'D'
+                break
+            else:
+                print('INVALID OPTION')
+        bags = requests.post(
+            "http://localhost:5000/bagsInLoadingArea", {"airline": airline})
+        print('\n')
+        print(bags.text)
 
     def getJammedSignal(self):
-        requests.get(
+        jammedBelt = requests.get(
             "http://localhost:5000/getJammedSignal")
-        print('\nGOT JAMMED SIGNAL!\n')
+        print('\n')
+        print(jammedBelt.text)
 
     def sendUnjammedSignal(self):
-        requests.post(
+        response = requests.post(
             "http://localhost:5000/sendUnjammedSignal")
-        print('\nSENT UNJAMMED SIGNAL!\n')
+        print('\n')
+        print(response.text)

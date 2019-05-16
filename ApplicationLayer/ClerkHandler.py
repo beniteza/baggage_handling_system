@@ -1,11 +1,11 @@
 from flask import request, jsonify
 from ApplicationLayer.BagHandler import BagHandler
-from DomainLayer.CheckInAreaUser import CheckInAreaUser
+from DomainLayer.Clerk import Clerk
 from DomainLayer.Bag import Bag, getBagId
 from DomainLayer.BagTag import BagTag
 
 
-class CheckInAreaUserHandler:
+class ClerkHandler:
     def checkInBag(self):
         passengerId = request.form['passengerId']
         flightId = request.form['flightId']
@@ -16,5 +16,5 @@ class CheckInAreaUserHandler:
 
     def placeBagIntoCB(self):
         bagId = getBagId()
-        result = CheckInAreaUser().placeBagIntoCB(bagId)
+        result = Clerk().placeBagIntoCB(bagId)
         return jsonify(result)

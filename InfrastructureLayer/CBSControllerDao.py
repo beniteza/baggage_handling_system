@@ -1,41 +1,55 @@
 from InfrastructureLayer.DBconfig import DatabaseConfig
+from InfrastructureLayer.RouteBagsHelper import routeBagsHelper, rerouteHelper
 from flask_mysqldb import MySQL
+import random
+import time
 
 app = DatabaseConfig()
 mysql = MySQL(app)
 
 
 class CBSControllerDao:
-    def bagsReachedLoadingArea(self):
-        cur = mysql.connection.cursor()
-        position = 'Airline Loading Area'
-        isBeingRouted = False
-        cur.execute("UPDATE `bags` SET `position` = %s, `isBeingRouted` = %s WHERE `position` != 'Airline Loading Area' AND `position` != 'Check In Area' ",
-                    (position, isBeingRouted))
-        mysql.connection.commit()
-        cur.close()
+    def routeBags(self):
+        return routeBagsHelper()
+
+    def rerouteBagsInCBS(self, rerouteJammedBags):
+        return rerouteHelper(rerouteJammedBags)
 
     def jammed(self):
         cur = mysql.connection.cursor()
-        isJammed = True
-        cur.execute(
-            "UPDATE `conveyorBelt` SET `isJammed` = %s WHERE id != 0", [isJammed])
-        mysql.connection.commit()
+        result = cur.execute(
+            "select * from conveyorBelt where `isJammed` = 1")
+
+        if result == 0:
+            isJammed = True
+            level = random.randint(1, 3)
+            beltType = random.randint(1, 4)
+            if beltType == 1:
+                beltType = 'A'
+            elif beltType == 2:
+                beltType = 'B'
+            elif beltType == 3:
+                beltType = 'C'
+            elif beltType == 4:
+                beltType = 'D'
+            cur.execute(
+                "UPDATE `conveyorBelt` SET `isJammed` = %s WHERE level = %s and type = %s", (isJammed, level, beltType))
+            mysql.connection.commit()
+
+            self.rerouteBagsInCBS(False)
+            time.sleep(20)
+            self.rerouteBagsInCBS(True)
+
         cur.close()
+        return 'Belt was jammed'
 
     def jammedCBChecker(self):
-        pass
-
-    def routeBags(self):
         pass
 
     def deactivateJammedBelt(self, beltId):
         pass
 
     def sendJammedSignal(self):
-        pass
-
-    def rerouteBagsInCBS(self):
         pass
 
     def activateBelt(self, beltId):

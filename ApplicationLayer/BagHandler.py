@@ -8,4 +8,4 @@ class BagHandler:
         bagTag = BagTag(passengerId, flightId, weight, classService)
         bagTagId = bagTag.getBagTagId()
         Bag(bagTagId)
-        return 'BAG CHECKED IN'
+        return 'BAG CHECKED IN. BAG TAG ID = ' + str(bagTagId)

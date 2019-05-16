@@ -1,18 +1,17 @@
-from flask import request
+from flask import request, jsonify
 from DomainLayer.CBSController import CBSController
 
 
 class CBSControllerHandler:
-    def bagsReachedLoadingArea(self):
-        CBSController().bagsReachedLoadingArea()
+    def routeBags(self):
+        response = CBSController().routeBags()
+        return jsonify(response)
 
     def jammed(self):
-        CBSController().jammed()
+        response = CBSController().jammed()
+        return jsonify(response)
 
     def jammedCBChecker(self):
-        pass
-
-    def routeBags(self):
         pass
 
     def deactivateJammedBelt(self, beltId):

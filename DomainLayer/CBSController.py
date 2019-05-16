@@ -2,16 +2,13 @@ from InfrastructureLayer.CBSControllerDao import CBSControllerDao
 
 
 class CBSController:
-    def bagsReachedLoadingArea(self):
-        CBSControllerDao().bagsReachedLoadingArea()
+    def routeBags(self):
+        return CBSControllerDao().routeBags()
 
     def jammed(self):
-        CBSControllerDao().jammed()
+        return CBSControllerDao().jammed()
 
     def jammedCBChecker(self):
-        pass
-
-    def routeBags(self):
         pass
 
     def deactivateJammedBelt(self, beltId):

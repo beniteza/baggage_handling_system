@@ -5,17 +5,17 @@ app = DatabaseConfig()
 mysql = MySQL(app)
 
 
-class TechnicianAreaUserDao:
+class TechnicianDao:
     def getJammedSignal(self):
         cur = mysql.connection.cursor()
         result = cur.execute(
             "SELECT * FROM conveyorBelt WHERE isJammed = %s", [True])
+        jammedBelt = cur.fetchall()
         cur.close()
         if result == 0:
-            print('\n\nNo Conveyor Belts are Jammed\n\n')
             return 'No Conveyor Belts are Jammed'
-        print('\n\nConveyor Belt Jammed!\n\n')
-        return 'Conveyor Belt Jammed!'
+        jammedBelt = jammedBelt[0]
+        return jammedBelt
 
     def sendUnjammedSignal(self):
         cur = mysql.connection.cursor()
@@ -23,5 +23,4 @@ class TechnicianAreaUserDao:
                     (False, True))
         mysql.connection.commit()
         cur.close()
-        print('\n\nConveyor Belt Was Unjammed!\n\n')
         return 'Conveyor Belt Was Unjammed!'

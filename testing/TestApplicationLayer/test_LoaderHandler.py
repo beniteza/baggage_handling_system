@@ -7,7 +7,7 @@ app = DatabaseConfig()
 mysql = MySQL(app)
 
 
-class TestAirlineLoadingAreaUserHandler(unittest.TestCase):
+class TestLoaderHandler(unittest.TestCase):
     def test_scanBag(self):
         bagTagId = 3
         response = requests.post(

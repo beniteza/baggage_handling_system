@@ -1,7 +1,7 @@
 from flask import render_template, jsonify
-from ApplicationLayer.CheckInAreaUserHandler import CheckInAreaUserHandler
-from ApplicationLayer.AirlineLoadingAreaUserHandler import AirlineLoadingAreaUserHandler
-from ApplicationLayer.TechnicianAreaUserHandler import TechnicianAreaUserHandler
+from ApplicationLayer.ClerkHandler import ClerkHandler
+from ApplicationLayer.LoaderHandler import LoaderHandler
+from ApplicationLayer.TechnicianHandler import TechnicianHandler
 from ApplicationLayer.CBSControllerHandler import CBSControllerHandler
 from InfrastructureLayer.DBconfig import DatabaseConfig
 import os
@@ -18,37 +18,37 @@ def index():
 
 @app.route('/checkInBag', methods=['POST'])
 def checkInBag():
-    return CheckInAreaUserHandler().checkInBag()
+    return ClerkHandler().checkInBag()
 
 
 @app.route('/placeBagIntoCB', methods=['POST'])
 def placeBagIntoCB():
-    return CheckInAreaUserHandler().placeBagIntoCB()
+    return ClerkHandler().placeBagIntoCB()
 
 
 @app.route('/scanBagTag', methods=['POST'])
 def scanBag():
-    return AirlineLoadingAreaUserHandler().scanBagTag()
+    return LoaderHandler().scanBagTag()
 
 
-@app.route('/bagsInLoadingArea')
+@app.route('/bagsInLoadingArea', methods=['POST'])
 def getAllBagsInAirlineLoadingArea():
-    return AirlineLoadingAreaUserHandler().getAllBagsInAirlineLoadingArea()
+    return LoaderHandler().getAllBagsInAirlineLoadingArea()
 
 
 @app.route('/getJammedSignal')
 def getJammedSignal():
-    return TechnicianAreaUserHandler().getJammedSignal()
+    return TechnicianHandler().getJammedSignal()
 
 
 @app.route('/sendUnjammedSignal', methods=['POST'])
 def sendUnjammedSignal():
-    return TechnicianAreaUserHandler().sendUnjammedSignal()
+    return TechnicianHandler().sendUnjammedSignal()
 
 
-@app.route('/bagsReachedLoadingArea', methods=['POST'])
-def bagsReachedLoadingArea():
-    return CBSControllerHandler().bagsReachedLoadingArea()
+@app.route('/routeBags', methods=['POST'])
+def routeBags():
+    return CBSControllerHandler().routeBags()
 
 
 @app.route('/jammed', methods=['POST'])

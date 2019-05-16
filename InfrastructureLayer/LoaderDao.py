@@ -5,30 +5,37 @@ app = DatabaseConfig()
 mysql = MySQL(app)
 
 
-class AirlineLoadingAreaUserDao:
+class LoaderDao:
     def scanBagTag(self, bagTagId):
         cur = mysql.connection.cursor()
         result = cur.execute("SELECT * FROM bagTags where id = %s", [bagTagId])
         bagTag = cur.fetchall()
         cur.close()
         if result == 0:
-            print('\n\nINVALID TAG\n\n')
             return 'Invalid Tag'
-        print('\n\n')
-        print(bagTag)
-        print('\n\n')
         return bagTag
 
-    def getAllBagsInAirlineLoadingArea(self):
+    def getAllBagsInAirlineLoadingArea(self, airline):
         cur = mysql.connection.cursor()
         result = cur.execute(
             "SELECT * FROM bags WHERE position = 'Airline Loading Area'")
         bags = cur.fetchall()
-        cur.close()
         if result == 0:
-            print('\n\nNo Bags Have Arrived\n\n')
             return 'No Bags Have Arrived'
-        print('\n\n')
-        print(bags)
-        print('\n\n')
-        return bags
+
+        bagsInLoadingArea = []
+        for bag in bags:
+            bagTagId = bag['bagTagId']
+
+            cur.execute(
+                "select flightId from bagTags where `id` = %s", [bagTagId])
+            flightId = cur.fetchall()
+
+            cur.execute(
+                "select airline from flights where `id` = %s", [flightId[0]['flightId']])
+            bagAirline = cur.fetchall()
+
+            if airline == bagAirline[0]['airline']:
+                bagsInLoadingArea.append(bag)
+        cur.close()
+        return bagsInLoadingArea

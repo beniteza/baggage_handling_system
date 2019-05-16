@@ -7,7 +7,7 @@ app = DatabaseConfig()
 mysql = MySQL(app)
 
 
-class TestCheckInAreaUserHandler(unittest.TestCase):
+class TestClerkHandler(unittest.TestCase):
     def test_checkInBag(self):
         requests.post(
             "http://localhost:5000/checkInBag", {"passengerId": '55', "flightId": '55', "weight": '55', "classService": 'Premium Economy Class'})
