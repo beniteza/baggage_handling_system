@@ -11,7 +11,7 @@ def routeBagsHelper():
         "select * from bags where `position` != 'Airline Loading Area' and `position` != 'Check In Area'")
     bags = cur.fetchall()
     if result == 0:
-        print('\n\nNo Bags In The System\n\n')
+        return 'No Bags In The System'
 
     result = cur.execute(
         "select * from conveyorBelt where `isJammed` = 1")

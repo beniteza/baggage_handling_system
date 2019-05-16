@@ -13,7 +13,7 @@ class LoaderDao:
         cur.close()
         if result == 0:
             return 'Invalid Tag'
-        return bagTag
+        return bagTag[0]
 
     def getAllBagsInAirlineLoadingArea(self, airline):
         cur = mysql.connection.cursor()

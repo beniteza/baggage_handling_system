@@ -17,14 +17,5 @@ class GeneralQueries:
     def randomBeltPosition(self):
         level = random.randint(1, 3)
         beltType = 'A'
-        # beltType = random.randint(1, 4)
-        # if beltType == 1:
-        #     beltType = 'A'
-        # elif beltType == 2:
-        #     beltType = 'B'
-        # elif beltType == 3:
-        #     beltType = 'C'
-        # elif beltType == 4:
-        #     beltType = 'D'
         position = str(level) + beltType
         return position

@@ -19,6 +19,12 @@ class TechnicianDao:
 
     def sendUnjammedSignal(self):
         cur = mysql.connection.cursor()
+        result = cur.execute(
+            "SELECT * FROM conveyorBelt WHERE isJammed = %s", [True])
+
+        if result == 0:
+            return 'No Conveyor Belts are Jammed'
+
         cur.execute("UPDATE `conveyorBelt` SET `isJammed` = %s WHERE `isJammed` = %s",
                     (False, True))
         mysql.connection.commit()

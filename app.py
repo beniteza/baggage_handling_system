@@ -3,6 +3,7 @@ from ApplicationLayer.ClerkHandler import ClerkHandler
 from ApplicationLayer.LoaderHandler import LoaderHandler
 from ApplicationLayer.TechnicianHandler import TechnicianHandler
 from ApplicationLayer.CBSControllerHandler import CBSControllerHandler
+from ApplicationLayer.TestingHandler import TestingHandler
 from InfrastructureLayer.DBconfig import DatabaseConfig
 import os
 from flask_mysqldb import MySQL
@@ -64,6 +65,11 @@ def deactivateJammedBelt():
 @app.route('/activateBelt')
 def activateBelt():
     return CBSControllerHandler().activateBelt()
+
+
+@app.route('/test_checkInBag', methods=['POST'])
+def test_checkInBag():
+    return TestingHandler().test_checkInBag()
 
 
 if __name__ == '__main__':

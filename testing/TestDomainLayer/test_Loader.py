@@ -1,14 +1,12 @@
 import unittest
 import requests
+from DomainLayer.Loader import Loader
 
 
-class TestLoaderHandler(unittest.TestCase):
+class TestLoader(unittest.TestCase):
     def test_scanBag(self):
-        bagTagId = 19
-        response = requests.post(
-            "http://localhost:5000/scanBagTag", {"bagTagId": bagTagId})
-
-        bagTag = response.json()
+        bagTagId = 1337
+        bagTag = Loader().scanBagTag(bagTagId)
 
         self.assertEqual(bagTag['id'], bagTagId)
         self.assertEqual(bagTag['passengerId'], 4)
@@ -17,9 +15,7 @@ class TestLoaderHandler(unittest.TestCase):
         self.assertEqual(bagTag['classService'], 'Business Class')
 
     def test_getAllBagsInAirlineLoadingArea(self):
-        response = requests.post(
-            "http://localhost:5000/bagsInLoadingArea", {"airline": 'B'})
-        bags = response.json()
+        bags = Loader().getAllBagsInAirlineLoadingArea('B')
         self.assertNotEqual(len(bags), 0)
 
 

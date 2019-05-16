@@ -1,35 +1,37 @@
-from InfrastructureLayer.DBconfig import DatabaseConfig
-from flask_mysqldb import MySQL
 import unittest
 import requests
-
-app = DatabaseConfig()
-mysql = MySQL(app)
 
 
 class TestClerkHandler(unittest.TestCase):
     def test_checkInBag(self):
         requests.post(
-            "http://localhost:5000/checkInBag", {"passengerId": '55', "flightId": '55', "weight": '55', "classService": 'Premium Economy Class'})
+            "http://localhost:5000/checkInBag", {"passengerId": '5', "flightId": '5', "weight": '55', "classService": 'Premium Economy Class'})
 
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM bags where passengerId = %s and flightId = %s and weight = %s and classService = %s",
-                    ('55', '55', '55', 'Premium Economy Class'))
-        bag = cur.fetchall()
+        response = requests.post("http://localhost:5000/test_checkInBag", {
+                                 "passengerId": '5', "flightId": '5', "weight": '55', "classService": 'Premium Economy Class'})
 
-        print(bag)
-        cur.execute("DELETE * FROM bags where id = %s", [bag['id']])
-        cur.close()
+        bag = response.json()
 
-        self.assertEqual(bag['id'], bag['id'])
-        self.assertEqual(bag['position'], 'Check in Area')
+        self.assertEqual(bag['position'], 'Check In Area')
         self.assertEqual(bag['isBeingRouted'], False)
 
     def test_placeBagIntoCB(self):
-        response = requests.post(
+        requests.post(
+            "http://localhost:5000/checkInBag", {"passengerId": '46', "flightId": '5', "weight": '55', "classService": 'Premium Economy Class'})
+
+        responsePlaceIntoCB = requests.post(
             "http://localhost:5000/placeBagIntoCB")
+
+        response = requests.post("http://localhost:5000/test_checkInBag", {
+                                 "passengerId": '46', "flightId": '5', "weight": '55', "classService": 'Premium Economy Class'})
+
+        bag = response.json()
+
         self.assertEqual(
-            response.json(), 'BAG WAS PLACED INTO THE CONVEYOR BELTs')
+            responsePlaceIntoCB.json(), 'BAG ' + str(bag['id']) + ' WAS PLACED INTO THE CONVEYOR BELT')
+        self.assertEqual(bag['id'], bag['id'])
+        self.assertEqual(bag['position'][1], 'A')
+        self.assertEqual(bag['isBeingRouted'], True)
 
 
 if __name__ == '__main__':
