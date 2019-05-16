@@ -44,7 +44,6 @@ class CBSControllerDao:
         return 'Belt was jammed'
 
     def deactivateJammedBelt(self):
-        print('\n\nB I G\n\n')
         cur = mysql.connection.cursor()
         result = cur.execute(
             "select * from conveyorBelt where `isJammed` = 1")
